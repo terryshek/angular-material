@@ -44,10 +44,32 @@
 /* 0 */
 /***/ function(module, exports) {
 
-	/**
-	 * Created by terryshek on 14/10/15.
-	 */
-	alert("hello")
+	var app = angular.module('StarterApp', ['ngMaterial']);
+
+	app.config(function($mdThemingProvider) {
+	    var customBlueMap = 		$mdThemingProvider.extendPalette('light-blue', {
+	        'contrastDefaultColor': 'light',
+	        'contrastDarkColors': ['50'],
+	        '50': 'ffffff'
+	    });
+	    $mdThemingProvider.definePalette('customBlue', customBlueMap);
+	    $mdThemingProvider.theme('default')
+	        .primaryPalette('customBlue', {
+	            'default': '600',
+	            'hue-1': '50'
+	        })
+	        .accentPalette('pink');
+	    $mdThemingProvider.theme('input', 'default')
+	        .primaryPalette('grey')
+	});
+
+	app.controller('AppCtrl', ['$scope', '$mdSidenav', function($scope, $mdSidenav){
+	    $scope.toggleSidenav = function(menuId) {
+			console.log(menuId)
+	        $mdSidenav(menuId).toggle();
+	    };
+
+	}]);
 
 /***/ }
 /******/ ]);
